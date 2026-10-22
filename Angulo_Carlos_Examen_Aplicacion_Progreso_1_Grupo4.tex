@@ -1,0 +1,307 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[a4paper,left=3.3cm,right=2.2cm,top=2.2cm,bottom=2.2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usetikzlibrary{positioning,calc}
+
+% Configuración tipográfica y de párrafos
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setstretch{1.15}
+
+% Paleta institucional UDLA
+\definecolor{udlaRed}{HTML}{8A1538}      % Rojo institucional UDLA
+\definecolor{udlaDarkRed}{HTML}{610E27}  % Rojo oscuro
+\definecolor{sectionBlue}{HTML}{1A365D}  % Azul marino elegante
+\definecolor{accentBlue}{HTML}{2B6CB0}   % Azul acento
+\definecolor{barGray}{HTML}{E2E8F0}      % Gris claro para barras de títulos
+\definecolor{textDark}{HTML}{1A202C}     % Texto principal oscuro
+\definecolor{metaGray}{HTML}{4A5568}     % Gris para metadatos
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=sectionBlue,
+    urlcolor=accentBlue,
+    citecolor=udlaRed
+}
+
+\captionsetup{font=small,labelfont=bf,justification=centering}
+
+% Franja lateral izquierda oficial (Sidebar)
+\AddToShipoutPictureBG{%
+  \AtPageLowerLeft{%
+    \includegraphics[height=\paperheight,width=2.45cm]{sidebar_proyectodss_style.png}%
+  }%
+}
+
+% Comandos para secciones modernas
+\newcommand{\barsection}[2]{%
+  \vspace{0.45cm}
+  \noindent\colorbox{barGray}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+      \bfseries\color{sectionBlue}\large #1\hspace{0.6cm}#2%
+    }%
+  }\par
+  \vspace{0.25cm}
+}
+
+\titleformat{\section}
+  {\Large\bfseries\color{sectionBlue}}
+  {\thesection}{0.75em}{}
+
+\titleformat{\subsection}
+  {\large\bfseries\color{sectionBlue}}
+  {\thesubsection}{0.75em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{udlaDarkRed}}
+  {\thesubsubsection}{0.75em}{}
+
+% Parámetros configurables del documento
+\newcommand{\materia}{APRENDIZAJE AUTOMÁTICO}
+\newcommand{\codigoMateria}{IIAR0004}
+\newcommand{\nrcMateria}{5414}
+\newcommand{\periodoAcademico}{Semestre 2026 – 2027 (2027-10)}
+\newcommand{\tipoActividad}{EXAMEN DE APLICACIÓN PRÁCTICA -- PROGRESO 1}
+\newcommand{\tituloTrabajo}{Examen de Aplicación: Diagnóstico, Limpieza y Preparación de Datos Empresariales}
+\newcommand{\subtituloTrabajo}{Prevención de Fuga de Información, Pipeline Escalonado Scikit-Learn y Consideraciones Éticas en la Predicción de Abandono Financiero}
+\newcommand{\grupo}{Group 4 (Actividad Grupal)}
+\newcommand{\docente}{Raúl Paredes, M. Sc.}
+\newcommand{\fechaEntrega}{Quito, 21 de octubre de 2026}
+
+\begin{document}
+\pagenumbering{gobble}
+
+% =========================================================================
+% PORTADA PROFESIONAL UDLA
+% =========================================================================
+\begin{titlepage}
+    \centering
+
+    \vspace*{-0.4cm}
+    \includegraphics[width=0.72\textwidth]{udla_logo_horizontal.png}\par
+    \vspace{0.35cm}
+
+    \begin{tikzpicture}
+        \draw[udlaRed, line width=1.5pt] (0,0) -- (\linewidth-20pt,0);
+    \end{tikzpicture}\par
+    \vspace{0.4cm}
+
+    {\fontsize{13pt}{15pt}\selectfont\bfseries\color{udlaRed} FACULTAD DE INGENIERÍA Y CIENCIAS APLICADAS}\par
+    \vspace{0.15cm}
+    {\fontsize{11pt}{13pt}\selectfont\bfseries\color{sectionBlue} INGENIERÍA DE SOFTWARE / SISTEMAS DE INFORMACIÓN}\par
+    \vspace{0.6cm}
+
+    \begin{tcolorbox}[colback=barGray!40,colframe=sectionBlue,width=\linewidth,arc=2mm,boxrule=1pt,left=12pt,right=12pt,top=8pt,bottom=8pt]
+        \centering
+        {\large\bfseries\color{sectionBlue} \materia}\par
+        \vspace{0.15cm}
+        {\small\color{metaGray} \textbf{Código:} \codigoMateria \quad|\quad \textbf{NRC:} \nrcMateria \quad|\quad \textbf{Período:} \periodoAcademico}\par
+        \vspace{0.1cm}
+        {\small\bfseries\color{udlaDarkRed} \tipoActividad}
+    \end{tcolorbox}\par
+    \vspace{0.6cm}
+
+    {\fontsize{14pt}{18pt}\selectfont\bfseries\color{sectionBlue} \tituloTrabajo}\par
+    \vspace{0.25cm}
+    {\fontsize{10.5pt}{13pt}\selectfont\color{accentBlue} \subtituloTrabajo}\par
+    \vspace{0.9cm}
+
+    \begin{flushleft}
+    \begin{tabular}{@{}>{\bfseries\color{sectionBlue}}p{4.2cm} p{8.8cm}@{}}
+        Grupo Asignado: & Group 4 (Entrega Individual) \\
+        Estudiante / Autor: & \textbf{Carlos Alberto Angulo Pizarro} (\texttt{carlos.angulo.pizarro@udla.edu.ec}) \\
+        Docente Titular: & \docente \\
+        Fecha de Entrega: & \fechaEntrega \\
+        Repositorio GitHub: & \href{https://github.com/Elnuget/examen-progreso-1-aprendizaje-automatico}{\texttt{github.com/Elnuget/examen-progreso-1...}} \\
+        Google Colab Online: & \href{https://colab.research.google.com/github/Elnuget/examen-progreso-1-aprendizaje-automatico/blob/main/examen_Aprendizaje_Automatico_Progreso_1_.ipynb}{\textbf{Clic para abrir y ejecutar en Google Colab}} \\
+    \end{tabular}
+    \end{flushleft}
+
+    \vfill
+    {\small\bfseries\color{metaGray} QUITO -- ECUADOR}
+\end{titlepage}
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% =========================================================================
+% SECCIÓN A: FUNDAMENTOS CONCEPTUALES
+% =========================================================================
+\section{Sección A: Fundamentos Conceptuales de Aprendizaje Automático}
+
+\subsection{Definición del Problema de Negocio y Variable Objetivo}
+El problema planteado por la entidad financiera corresponde a la \textbf{retención de clientes} y la mitigación del \textbf{abandono (\textit{Customer Churn})}. El objetivo analítico consiste en identificar de forma anticipada los factores conductuales, demográficos y transaccionales asociados con la deserción de clientes, con la finalidad de desplegar estrategias proactivas y personalizadas de fidelización antes de que se formalice la cancelación del servicio.
+
+* \textbf{Variable Objetivo ($y$):} Se define formalmente como la variable binaria indicadora $\text{abandono} \in \{0, 1\}$, donde:
+  \begin{equation}
+      y_i = \begin{cases} 
+      1, & \text{si el cliente $i$ abandonó o canceló los servicios de la entidad financiera.} \\
+      0, & \text{si el cliente $i$ permanece activo y fidelizado.}
+      \end{cases}
+  \end{equation}
+
+\subsection{Tipología de Aprendizaje: Supervisado}
+El problema se aborda estrictamente bajo el paradigma de \textbf{Aprendizaje Supervisado (\textit{Supervised Learning})}. La justificación técnica radica en que el conjunto de datos histórico dispone de una variable de salida explícita y rotulada ($\text{abandono} \in \{0, 1\}$) para cada registro observacional $\mathbf{x}_i$, la cual funge como señal supervisora durante la optimización matemática del algoritmo.
+
+\subsection{Naturaleza de la Tarea Futura: Clasificación Binaria}
+La tarea algorítmica corresponde a \textbf{Clasificación Binaria}, dado que el espacio de salida $\mathcal{Y}$ es cualitativo, discreto y dicotómico ($\mathcal{Y} = \{0, 1\}$). No se modela una variable de respuesta continua (regresión), sino la frontera de decisión bayesiana que separa ambas clases y la probabilidad posterior $P(Y=1 \mid \mathbf{X}=\mathbf{x})$.
+
+\subsection{Ciclo de Vida de ML y Posición de la Preparación de Datos}
+El ciclo de ingeniería de soluciones de aprendizaje automático comprende:
+\begin{enumerate}[noitemsep]
+    \item \textbf{Comprensión del Negocio:} Planteamiento de hipótesis, métricas y restricciones.
+    \item \textbf{Auditoría y Exploración de Datos (EDA):} Perfilado y diagnóstico de integridad.
+    \item \textbf{Preparación y Preprocesamiento de Datos (Fase Actual):} Limpieza, imputación, ingeniería de características, codificación y escalamiento. Se ubica como el puente crítico entre la recolección cruda y el modelado, consumiendo más del 70\% del esfuerzo técnico.
+    \item \textbf{Modelado Predictivo:} Ajuste algorítmico y búsqueda de hiperparámetros.
+    \item \textbf{Evaluación Rigurosa:} Medición sobre particiones independientes y auditoría de equidad.
+    \item \textbf{Despliegue y Monitoreo:} Puesta en producción y supervisión de \textit{data drift}.
+\end{enumerate}
+
+\subsection{Peligro de Evaluar con los Mismos Datos de Entrenamiento}
+Evaluar un modelo predictivo sobre la misma muestra utilizada para ajustar sus parámetros genera una estimación engañosamente optimista (\textit{optimism bias}) producto del \textbf{sobreajuste (\textit{overfitting})}. El estimador memoriza las correlaciones espurias y el ruido muestral en lugar de capturar la distribución poblacional verdadera, perdiendo su capacidad de generalización sobre clientes futuros no vistos.
+
+% =========================================================================
+% SECCIÓN B: AUDITORÍA EXPLORATORIA DE DATOS
+% =========================================================================
+\section{Sección B: Auditoría Exploratoria y Diagnóstico de Calidad}
+
+El conjunto de datos crudo (\texttt{clientes\_financieros\_examen.csv}) cuenta inicialmente con \textbf{6.035 registros y 13 atributos}.
+
+\subsection{Valores Faltantes y Coerción de Tipos}
+Se identificó una severa anomalía tipográfica: las variables \texttt{edad}, \texttt{ingresos\_anuales} y \texttt{saldo\_promedio} fueron catalogadas como \texttt{object} (texto) por la presencia de cadenas espurias \texttt{"desconocido"}.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Variable} & \textbf{Tipo Inicial} & \textbf{Nulos Explícitos} & \textbf{Porcentaje (\%)} & \textbf{Strings 'desconocido'} \\
+\midrule
+\texttt{ingresos\_anuales} & \texttt{object} & 362 & 6.00\% & 12 \\
+\texttt{saldo\_promedio}   & \texttt{object} & 299 & 4.95\% & 12 \\
+\texttt{estado\_civil}     & \texttt{object} & 239 & 3.96\% & 0 \\
+\texttt{canal}            & \texttt{object} & 180 & 2.98\% & 0 \\
+\texttt{edad}             & \texttt{object} & 152 & 2.52\% & 12 \\
+\texttt{region}           & \texttt{object} & 120 & 1.99\% & 25 (marcados como '?') \\
+\bottomrule
+\end{tabular}
+\caption{Diagnóstico inicial de valores faltantes y marcadores espurios.}
+\end{table}
+
+\subsection{Duplicados y Distribución del Target}
+\begin{itemize}[noitemsep]
+    \item \textbf{Duplicados Exactos:} Se confirmaron \textbf{35 registros duplicados idénticos} tanto en su identificador \texttt{id\_cliente} como en todos sus atributos clínicos y financieros.
+    \item \textbf{Distribución de la Variable Objetivo:} La clase 0 (permanencia) registra \textbf{5.216 observaciones (86,43\%)}, mientras que la clase 1 (abandono) cuenta con \textbf{819 observaciones (13,57\%)}, arrojando un ratio de desbalance moderado de \textbf{6,37 a 1}.
+\end{itemize}
+
+\subsection{Interpretación de Tres Hallazgos Críticos}
+\begin{enumerate}
+    \item \textbf{Hallazgo 1: Tipos erróneos, centinelas y edades imposibles:} La presencia de strings impide operaciones algebraicas. Asimismo, se identificaron edades de hasta 250 años y saldos con centinela \texttt{-999999.00} (10 registros). Ambos deben mapearse a \texttt{NaN} para su posterior imputación, conservando los sobregiros legítimos ($saldo < 0$).
+    \item \textbf{Hallazgo 2: Fuga de información en \texttt{motivo\_baja}:} El 100\% de los clientes que no abandonan tienen \texttt{"No aplica"}, y el 100\% de los que abandonan tienen una causal explícita. Al ser un atributo post-evento, causaría un atajo trivial y engañoso. Se excluye totalmente de $X$.
+    \item \textbf{Hallazgo 3: Redundancia y categorías fragmentadas:} Se unificaron variantes de strings con espacios en blanco (\texttt{" DIGITAL"}, \texttt{" SUCURSAL"}), capitalización y símbolos \texttt{"?"}, y se removieron los 35 duplicados exactos.
+\end{enumerate}
+
+% =========================================================================
+% SECCIÓN C: LIMPIEZA DE DATOS (df_clean)
+% =========================================================================
+\section{Sección C: Saneamiento de Datos y Reglas de Dominio}
+
+A partir de \texttt{df\_raw}, se generó la base de datos saneada \texttt{df\_clean} (6.000 registros):
+\begin{itemize}[noitemsep]
+    \item \textbf{Coerción Numérica:} Conversión de \texttt{edad}, \texttt{ingresos\_anuales} y \texttt{saldo\_promedio} con \texttt{pd.to\_numeric(errors='coerce')}.
+    \item \textbf{Normalización Categórica:} Eliminación de espacios marginales (\texttt{.str.strip()}), capitalización homogénea (\texttt{.str.capitalize()}) y mapeo de marcadores como \texttt{'?'} a \texttt{np.nan}.
+    \item \textbf{Eliminación de Duplicados:} Se descartaron 35 filas redundantes, consolidando 6.000 clientes únicos.
+    \item \textbf{Reglas de Dominio Financiero:} 
+    1) Edades fuera del rango biológico $[18, 100]$ se convirtieron a \texttt{np.nan} (15 casos con $>100$ años).
+    2) Centinelas de error transaccional \texttt{saldo\_promedio == -999999} se sustituyeron por \texttt{np.nan} (10 casos).
+    3) Los sobregiros legítimos ($saldo < 0$, 548 clientes) se preservaron intactos, reconociendo su valor semántico como indicador de vulnerabilidad financiera.
+\end{itemize}
+
+% =========================================================================
+% SECCIÓN D: PREPARACIÓN DE VARIABLES Y PIPELINES SCIKIT-LEARN
+% =========================================================================
+\section{Sección D: Preparación de Características y Diseño Experimental}
+
+\subsection{Definición de Matrices y Prevención de Fuga}
+Se descartó el identificador arbitrario \texttt{id\_cliente} y la variable post-evento \texttt{motivo\_baja}, asegurando que la matriz de características $X$ contenga únicamente 10 predictores observables en tiempo de inferencia:
+\begin{align}
+    X = [ & \text{edad}, \text{ingresos\_anuales}, \text{antiguedad\_meses}, \text{saldo\_promedio}, \text{productos\_activos}, \nonumber \\
+          & \text{canal}, \text{estado\_civil}, \text{region}, \text{contacto\_preferido}, \text{incumplimiento} ]
+\end{align}
+
+\subsection{Partición Estratificada 80/20}
+Se ejecutó una división \textit{Hold-out} preservando exactamente la proporción de la variable objetivo mediante \texttt{train\_test\_split} con \texttt{stratify=y} y \texttt{random\_state=42}:
+\begin{itemize}[noitemsep]
+    \item \textbf{Conjunto de Entrenamiento ($X_{train}$):} 4.800 registros (86,44\% permanencia, 13,56\% abandono).
+    \item \textbf{Conjunto de Prueba ($X_{test}$):} 1.200 registros (86,42\% permanencia, 13,58\% abandono).
+\end{itemize}
+
+\subsection{Arquitectura del ColumnTransformer}
+Para prevenir de forma absoluta la fuga de datos, el preprocesamiento se encapsuló en un \texttt{ColumnTransformer} ajustado (\texttt{fit}) exclusivamente sobre $X_{train}$:
+\begin{itemize}
+    \item \textbf{Sub-pipeline Numérico:} Imputación por mediana (\texttt{SimpleImputer(strategy='median')}) seguida de estandarización normal (\texttt{StandardScaler()}).
+    \item \textbf{Sub-pipeline Categórico:} Imputación por la moda (\texttt{SimpleImputer(strategy='most\_frequent')}) seguida de codificación binaria One-Hot (\texttt{OneHotEncoder(handle\_unknown='ignore')}).
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\begin{tcolorbox}[colback=barGray!20,colframe=sectionBlue,width=0.95\linewidth,arc=1mm]
+\small
+\textbf{Verificación de Integridad Matemática en Matrices Finales:}
+\begin{itemize}[noitemsep]
+    \item Dimensiones transformadas: $X_{train} \in \mathbb{R}^{4800 \times 19}$, $X_{test} \in \mathbb{R}^{1200 \times 19}$.
+    \item Total de características generadas: 5 numéricas estandarizadas + 14 columnas dummy OHE.
+    \item Verificación de nulos residuales: $\text{NaNs en Train} = 0$, $\text{NaNs en Test} = 0$.
+    \item Verificación de infinitos: $\text{Infinitos en Train} = 0$, $\text{Infinitos en Test} = 0$.
+\end{itemize}
+\end{tcolorbox}
+\caption{Resultados cuantitativos del procesamiento en Scikit-Learn.}
+\end{figure}
+
+% =========================================================================
+% SECCIÓN E: DISEÑO EXPERIMENTAL, ÉTICA Y CONCLUSIONES
+% =========================================================================
+\section{Sección E: Diseño Experimental, Ética y Conclusiones}
+
+\subsection{Análisis de Sesgo en la Eliminación de Outliers}
+La poda mecánica de valores atípicos reduce la varianza y la representatividad muestral. En el dominio financiero, los comportamientos extremos (ej. saldos sobregirados o patrimonios atípicos) representan precisamente los escenarios de mayor criticidad para la deserción. Ignorarlos generaría modelos sesgados hacia el cliente promedio e incapaces de generalizar ante casos de estrés económico.
+
+\subsection{Justificación del Ajuste Estricto en Entrenamiento}
+Ajustar los estimadores de imputación y escalamiento ($\tilde{x}, \mu, \sigma$) únicamente en $X_{train}$ garantiza la independencia estadística de $X_{test}$. Si se utilizara el dataset completo, los parámetros del conjunto de prueba contaminarían el entrenamiento, provocando una falsa sensación de alto rendimiento que fracasará en el despliegue real.
+
+\subsection{Mecanismo de Fuga en Variables Post-Evento}
+La variable \texttt{motivo\_baja} constituye un atajo espurio (\textit{shortcut learning}). Al existir únicamente tras la decisión de baja, su inclusión obligaría al modelo a depender de una característica inexistente en clientes activos, invalidando su función predictiva.
+
+\subsection{Riesgos Éticos y Gobernanza de Datos}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Discriminación Indirecta (\textit{Redlining}):} El uso de combinaciones entre \texttt{region} y \texttt{estado\_civil} puede correlacionar con clases socioeconómicas protegidas, penalizando sistemáticamente a clientes de ciertas zonas.
+    \item \textbf{Privacidad y Consentimiento:} El uso de historiales crediticios requiere autorización explícita y gobernanza conforme al marco de protección de datos personales.
+\end{enumerate}
+
+\subsection{Controles de Calidad y Equidad Propuestos}
+Se propone auditar la paridad estadística mediante métricas de equidad (\textit{Disparate Impact Ratio}, \textit{Equalized Odds}), incorporar explicabilidad mediante valores SHAP (\textit{Human-in-the-loop}) y supervisar continuamente la deriva de datos (\textit{Data Drift}) en producción.
+
+\subsection{Conclusión y Dictamen Técnico}
+Los datos se encuentran \textbf{100\% acondicionados, validados y libres de fugas} para proceder con la fase de modelado predictivo. Como limitación persistente, se destaca el desbalance de clases (13,6\% abandono), el cual requerirá utilizar métricas no sensibles al sesgo mayoritario (PR-AUC, F1-Score) y algoritmos con ponderación de costos (\texttt{class\_weight='balanced'}).
+
+\end{document}
